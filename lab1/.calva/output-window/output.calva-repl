@@ -1,0 +1,209 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Connecting ...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: 
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - File URLs in stacktrace frames are peekable and clickable.
+clj::user=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+nil
+clj::lab1.core=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+()
+()
+()
+()
+((:a) (:b) (:c))
+clj::lab1.core=> 
+()
+()
+()
+()
+((:a) (:b) (:c))
+clj::lab1.core=> 
+(:a :b)
+(:a :b)
+(:a :b)
+(:a :b)
+((:b :a :b) (:c :a :b))
+clj::lab1.core=> 
+(:a)
+(:a)
+(:a)
+(:a)
+((:b :a) (:c :a))
+clj::lab1.core=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+:a
+:b
+:c
+nil
+((:b :a) (:c :a))
+clj::lab1.core=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+:a
+:b
+:c
+nil
+((:b :a) (:c :a))
+clj::lab1.core=> 
+:a
+:b
+:c
+nil
+((:b :a :b) (:c :a :b))
+clj::lab1.core=> 
+1
+2
+3
+nil
+((1) (2) (3))
+clj::lab1.core=> 
+; Syntax error compiling at (d:\универ\СМП\nsu-sdt2020\lab1\1.1.clj:27:5).
+; Unable to resolve symbol: add-letters-to-words in this context
+clj::lab1.core=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+#'lab1.core/add-letters-to-words
+clj::lab1.core=> 
+#'lab1.core/alphabet-combinations
+clj::lab1.core=> 
+(())
+:a
+:b
+:c
+nil
+()
+((:a) (:b) (:c))
+:a
+:b
+:c
+nil
+((:b) (:c))
+:a
+:b
+:c
+nil
+((:c))
+:a
+:b
+:c
+nil
+()
+((:b :a) (:c :a) (:a :b) (:c :b) (:a :c) (:b :c))
+:a
+:b
+:c
+nil
+((:c :a) (:a :b) (:c :b) (:a :c) (:b :c))
+:a
+:b
+:c
+nil
+((:a :b) (:c :b) (:a :c) (:b :c))
+:a
+:b
+:c
+nil
+((:c :b) (:a :c) (:b :c))
+:a
+:b
+:c
+nil
+((:a :c) (:b :c))
+:a
+:b
+:c
+nil
+((:b :c))
+:a
+:b
+:c
+nil
+()
+((:a :b :a) (:c :b :a) (:a :c :a) (:b :c :a) (:b :a :b) (:c :a :b) (:a :c :b) (:b :c :b) (:b :a :c) (:c :a :c) (:a :b :c) (:c :b :c))
+clj::lab1.core=> 
+#'lab1.core/add-letters-to-words
+clj::lab1.core=> 
+#'lab1.core/add-lettes-to-letter
+clj::lab1.core=> 
+#'lab1.core/add-letters-to-words
+clj::lab1.core=> 
+#'lab1.core/alphabet-combinations
+clj::lab1.core=> 
+((:a :b :a) (:c :b :a) (:a :c :a) (:b :c :a) (:b :a :b) (:c :a :b) (:a :c :b) (:b :c :b) (:b :a :c) (:c :a :c) (:a :b :c) (:c :b :c))
+clj::lab1.core=> 
+; Syntax error compiling at (d:\универ\СМП\nsu-sdt2020\lab1\1.4.clj:27:18).
+; Unable to resolve symbol: concat-words-to-alphabet in this context
+clj::lab1.core=> 
+nil
+clj::lab1.core=> 
+#'lab1.core/word-to-word
+clj::lab1.core=> 
+#'lab1.core/concat-words-to-alphabet
+clj::lab1.core=> 
+#'lab1.core/create-all
+clj::lab1.core=> 
+#'lab1.core/create-all-iterator
+clj::lab1.core=> 
+(((:a)) ((:b)) ((:c)))
+clj::lab1.core=> 
+((:a :b :c))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterator
+clj::lab1.core=> 
+(:a :b :c)
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+(:a :b :c)
+clj::lab1.core=> 
+; Execution error (ArityException) at lab1.core/create-all-iterate (REPL:27).
+; Wrong number of args (1) passed to: lab1.core/create-all-iterate/fn--3921
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+; Execution error (ArityException) at lab1.core/create-all-iterate (REPL:27).
+; Wrong number of args (1) passed to: lab1.core/create-all-iterate/fn--3948
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+(((:a)) ((:b)) ((:c)))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+((:b :a) (:c :a) (:a :b) (:c :b) (:a :c) (:b :c))
+clj::lab1.core=> 
+((:a :b :a) (:c :b :a) (:a :c :a) (:b :c :a) (:b :a :b) (:c :a :b) (:a :c :b) (:b :c :b) (:b :a :c) (:c :a :c) (:a :b :c) (:c :b :c))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+((:b :a) (:c :a) (:a :b) (:c :b) (:a :c) (:b :c))
+clj::lab1.core=> 
+((:a) (:b) (:c))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+((:a) (:b) (:c))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+((:a :b :a) (:c :b :a) (:a :c :a) (:b :c :a) (:b :a :b) (:c :a :b) (:a :c :b) (:b :c :b) (:b :a :c) (:c :a :c) (:a :b :c) (:c :b :c))
+clj::lab1.core=> 
+#'lab1.core/create-all-iterate
+clj::lab1.core=> 
+; nREPL Connection was closed

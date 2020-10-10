@@ -21,3 +21,10 @@
    (list ()) (range n)))
 
 (create-all `(:a :b :c) 3)
+
+(defn create-all-iterate
+  [alphabet n]
+  (let [nn (+ n 1)]
+    (nth (iterate #(concat-words-to-alphabet % alphabet) `(())) (dec nn))))
+
+(create-all-iterate `(:a :b :c) 3)
