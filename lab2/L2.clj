@@ -19,33 +19,45 @@
 
 ;; 2.1
 
-(def integrate
+(defn calc_tail 
+  [f b w]
+  (/ (* (- b (- b (mod b w)))
+        (+ (f b)
+           (f (- b (mod b w)))))
+     2.0)
+  )
+
+(def integrate_no_tail
   (memoize
    (fn [f b w]
      (let [bb (- b (mod b w))]
        (if (> bb 0.0)
-         (+ (integrate f (- bb w) w)
+         (+ (integrate_no_tail f (- bb w) w)
             (/ (* w
                   (+ (f bb)
                      (f (- bb w))))
                2.0))
-         (+ (/ (* w
-                  (+ (f b)
-                     (f (- b (mod b w)))))
-               2.0)))))))
+         (+ 0))))))
+
+(defn integrate
+  [f b w]
+  (if (= 0 (mod b w))
+    (integrate_no_tail f b w)
+    (+ (calc_tail f b w) (integrate_no_tail f b w))))
 
 (defn -main [& args]
-  (let [f #(* %1 %1)
-        w 3]
-    (time (integrate f 200 w))
-    (time (integrate f 300 w))
-    (time (integrate f 299 w))
-    (time (integrate f 301 w))))
+  (let [f (fn [x] x)
+        w 5]
+    (time (integrate f 20 w))
+    (time (integrate f 15 w))
+    (time (integrate f 20 w))
+    (time (integrate f 50 w))
+  ))
 
 (-main)
 
 
-;; 2.2
+;; 2.2.0
 
 (defn many_trapezoids_strange_range
   [f a b n]
@@ -54,8 +66,6 @@
     (map #(trapezoid f %1 %2) seq (rest seq))))
 
 (time (take 10 (reductions + (many_trapezoids_strange_range #(* %1 %1) 0 6 10))))
-
-
 
 (defn create_lazy_seq_integrate
   ([f a w] (create_lazy_seq_integrate f a w 0))
@@ -76,3 +86,19 @@
   (time (lazy_integrate f seq  b w))
   (time (lazy_integrate f seq b w))
   (time (lazy_integrate f seq b w)))
+
+; 2.2.1
+ 
+(defn get_lazy_integrate [f w]
+  (let [seq (create_lazy_seq_integrate f 0 w)]
+    (fn [b]
+      (if  (= (mod b w) 0)
+        (nth seq (/ b w))
+        (+ (nth seq (/ (- b (mod b w)) w)) (trapezoid f (- b (mod b w)) b))))))
+
+
+(let [w 3
+      f (fn [x] 1)
+      seq_integrate (get_lazy_integrate f w)]
+  (time (seq_integrate 1000))
+  (time (seq_integrate 1100)))
