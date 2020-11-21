@@ -38,33 +38,45 @@
 (time (doall (parallel_filter `(1 -2 -3 -4 5 -6 7 -8 9))))
 
 ; 3.2 
-; (╯ ° □ °) ╯ (┻━┻)
-; плохо работает
+
+(defn new_filter
+  [f]
+  (Thread/sleep 100)
+  (fn [number] (f number))
+  )
 
 (defn my_lazy_partition
-  ([m seq] (my_lazy_partition (drop m seq) m (take m seq)))
-  ([seq m result]
-   (lazy-seq (cons result (my_lazy_partition (drop m seq) m (take m seq))))))
+  ([m my_seq] (my_lazy_partition (drop m my_seq) m (take m my_seq)))
+  ([my_seq m result]
+   (lazy-seq
+    (when-let [not_empty_seq (seq my_seq)]
+      (cons result (my_lazy_partition (drop m not_empty_seq) m (take m not_empty_seq)))
+      )
+    )
+   ))
 
 (defn future_batch
-  [batch]
-  (->> batch
-       (map #(future (doall (filter heavy_filter %))))
-       (doall)
-       (mapcat deref)
-       ))
+  [filt batch]
+  (let [ff (new_filter filt)]
+    (->> batch
+         (map #(future (doall (filter ff %))))
+         (doall)
+         (mapcat deref))
+    )
+  )
 
 (defn lazy_parallel_filter
-  [seq len_chunk len_batch]
+  [filt len_chunk len_batch seq]
   (->> seq
        (my_lazy_partition len_chunk)
        (my_lazy_partition len_batch)
-       (map #(future_batch %))
+       (map #(future_batch filt %))
        (mapcat identity)
        ))
 
-; тут работает
-(time (doall (take 3 (lazy_parallel_filter `(-1 2 -3 -4 -5 6 -7 8 -9) 2 2))))
 
-; тут не работает
-(time (doall (take 3 (lazy_parallel_filter (take 10 (range)) 2 2))))
+(time (doall (take 3 (lazy_parallel_filter neg? 2 2 `(-1 2 -3 -4 -5 6 -7 8 -9)))))
+
+(time (doall (take 3 (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10))))))
+
+(time (doall (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10)))))
