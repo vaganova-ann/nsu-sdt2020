@@ -84,4 +84,4 @@
 
 (time (doall (lazy_parallel_filter neg? 2 2 (take 10 (range -10 0)))))
 
-(time (doall (lazy_parallel_filter neg? 2 2 (range))))
+(time (take 10 (lazy_parallel_filter even? 2 2 (range))))
