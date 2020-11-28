@@ -41,8 +41,9 @@
 
 (defn new_filter
   [f]
-  (Thread/sleep 100)
-  (fn [number] (f number))
+  (fn [number] 
+    (Thread/sleep 100)
+    (f number))
   )
 
 (defn my_lazy_partition 
@@ -81,6 +82,6 @@
 
 (time (doall (take 3 (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10))))))
 
-(time (doall (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10)))))
+(time (doall (lazy_parallel_filter neg? 2 2 (take 10 (range -10 0)))))
 
 (time (doall (lazy_parallel_filter neg? 2 2 (range))))
