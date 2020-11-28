@@ -45,15 +45,16 @@
   (fn [number] (f number))
   )
 
-(defn my_lazy_partition
-  ([m my_seq] (my_lazy_partition (drop m my_seq) m (take m my_seq)))
-  ([my_seq m result]
-   (lazy-seq
-    (when-let [not_empty_seq (seq my_seq)]
-      (cons result (my_lazy_partition (drop m not_empty_seq) m (take m not_empty_seq)))
-      )
+(defn my_lazy_partition 
+  [m my_seq]
+  (lazy-seq 
+   (when-let [not_empty_seq (seq my_seq)]
+    (cons (take m not_empty_seq) (my_lazy_partition m (drop m not_empty_seq)))
+     )
     )
-   ))
+  )
+
+(my_lazy_partition 2 `(1 2 3 4 5 6))
 
 (defn future_batch
   [filt batch]
@@ -61,7 +62,8 @@
     (->> batch
          (map #(future (doall (filter ff %))))
          (doall)
-         (mapcat deref))
+         (mapcat deref)
+         )
     )
   )
 
@@ -80,3 +82,5 @@
 (time (doall (take 3 (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10))))))
 
 (time (doall (lazy_parallel_filter neg? 2 2 (take 10 (range -10 10)))))
+
+(time (doall (lazy_parallel_filter neg? 2 2 (range))))
